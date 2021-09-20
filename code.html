@@ -56,17 +56,54 @@
                 <pre class="line-number">
                     <code class="language-javascript">
                         <!-- === Code goes here === -->
-                        // Call Hello World
-                        function HelloWorld(){
-                        alert("Hello World");
-                        }
+                        document.getElementById("btnSubmit").addEventListener("click", runNumbers);
+
+function runNumbers(){
+
+    let firstNum = parseInt(document.getElementById("firstValue").value);
+    let secondNum = parseInt(document.getElementById("secondValue").value);
+    let count = 0;
+    let result = [];
+    let str = [];
+    let tempStr = "";
+
+    if((firstNum <1 || firstNum > 100) || (secondNum < 1 || secondNum > 100)){
+        alert("Numbers must be 1 to 100");
+        return;
+    }
+
+    for(let i = 1; i <= 100; i++){
+
+        if(i % firstNum === 0 && i % secondNum === 0){
+            tempStr = "FizzBuzz";
+        }
+        else if (i % firstNum === 0) {
+            tempStr = "Fizz";
+        }
+        else if (i % secondNum === 0) {
+            tempStr = "Buzz";
+        }
+        else {
+            tempStr = i;
+        }
+        // See source code on github
+        str += `<td>${tempStr}</td>`;
+        count ++;
+        if(count === 5){
+            //This does not render correctly in prism. See source code on github.
+            result += `<tr>${str}</tr>`;
+            count = 0;
+            str = [];
+        }
+    }
+    document.getElementById("results").innerHTML = result;    
+}
                     </code>
                 </pre>
             </div>
             <div class="col-lg-4">
-                <p>The Code is structed in one function.</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a fucntion that displays an alert with a message of "Hello World"</p>
+                <h5>FizzBuzz</h5>
+                <p>Simple loop function to test numbers give. Gretest leasson was manipulating the DOM to render results. </p>
             </div>
         </div>
      </div>
